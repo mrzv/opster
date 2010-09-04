@@ -401,6 +401,7 @@ _opster_completion()
     COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \\
                    COMP_CWORD=$COMP_CWORD \\
                    OPSTER_AUTO_COMPLETE=1 $1 ) )
+    COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 }
 complete -o default -F _opster_completion %s
 # opster bash completion end
