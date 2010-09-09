@@ -370,10 +370,14 @@ def autocomplete(cmdtable, args, middleware):
         print ' '.join(filter(lambda x: x.startswith(current), commands))
     
     # command options
-    elif cwords[0] in commands:
+    else:
+        try:
+            aliases, (cmd, opts, usage) = findcmd(cwords[0], cmdtable)
+        except AmbiguousCommand:
+            sys.exit(1) 
+
         idx = -2 if current else -1
         options = []
-        aliases, (cmd, opts, usage) = findcmd(cwords[0], cmdtable)
 
         for o in opts:
             short, long, default, help = o[:4]
