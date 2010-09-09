@@ -242,7 +242,8 @@ def help_cmd(func, usage, options):
 def help_options(options):
     yield 'options:\n\n'
     output = []
-    for short, name, default, desc in options:
+    for o in options:
+        short, name, default, desc = o[:4]
         if hasattr(default, '__call__'):
             default = default(None)
         default = default and ' (default: %s)' % default or ''
